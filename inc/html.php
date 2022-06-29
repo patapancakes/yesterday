@@ -409,6 +409,7 @@ EOF;
 							$rules_extra
 							<ul>
 								$reqmod_html
+								<li>All fields are optional except for message.</li>
 								$filetypes_html
 								$max_file_size_rules_html
 								$thumbnails_html
