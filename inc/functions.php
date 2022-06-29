@@ -669,7 +669,7 @@ function createThumbnail($file_location, $thumb_location, $new_w, $new_h, $spoil
 		imagedestroy($src_img);
 	} else if (TINYIB_THUMBNAIL == 'ffmpeg') {
 		ffmpegThumbnail($file_location, $thumb_location, $new_w, $new_h);
-	} else { // ImageMagick
+	} else if (TINYIB_THUMBNAIL == 'imagemagick') { // ImageMagick
 		$discard = '';
 
 		$exit_status = 1;
@@ -680,6 +680,21 @@ function createThumbnail($file_location, $thumb_location, $new_w, $new_h, $spoil
 
 		$exit_status = 1;
 		exec("convert $file_location -auto-orient -thumbnail '" . $new_w . "x" . $new_h . "' -coalesce -layers OptimizeFrame -depth 4 -type palettealpha $thumb_location", $discard, $exit_status);
+
+		if ($exit_status != 0) {
+			return false;
+		}
+	} else { // GraphicsMagick
+		$discard = '';
+
+		$exit_status = 1;
+		exec("gm version", $discard, $exit_status);
+		if ($exit_status != 0) {
+			fancyDie('GraphicsMagick is not installed, or the gm command is not in the server\'s $PATH.<br>Install GraphicsMagick, or set TINYIB_THUMBNAIL to \'gd\' or \'ffmpeg\'.');
+		}
+
+		$exit_status = 1;
+		exec("gm convert $file_location -auto-orient -thumbnail '" . $new_w . "x" . $new_h . "' $thumb_location", $discard, $exit_status);
 
 		if ($exit_status != 0) {
 			return false;
@@ -784,10 +799,14 @@ function addVideoOverlay($thumb_location) {
 		} else {
 			imagepng($thumbnail, $thumb_location);
 		}
-	} else { // imagemagick
+	} else if (TINYIB_THUMBNAIL == 'imagemagick') { // imagemagick
 		$discard = '';
 		$exit_status = 1;
 		exec("convert $thumb_location video_overlay.png -gravity center -composite -quality 75 $thumb_location", $discard, $exit_status);
+	} else { // graphicsmagick
+		$discard = '';
+		$exit_status = 1;
+		exec("gm composite video_overlay.png $thumb_location -gravity center $thumb_location", $discard, $exit_status);
 	}
 }
 

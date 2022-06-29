@@ -80,6 +80,10 @@ support in mind.
       - Install ImageMagick and ensure that the ``convert`` command is available.
       - Set ``TINYIB_THUMBNAIL`` to ``imagemagick``.
       - **Note:** GIF files will have animated thumbnails, which will often have large file sizes.
+    - To use GraphicsMagick instead of GD when creating thumbnails:
+      - Install GraphicsMagick and ensure that the ``gm`` command is available.
+      - Set ``TINYIB_THUMBNAIL`` to ``gm``.
+      - **Note:** GIF files will have animated thumbnails, which will often have large file sizes.
     - To use TINYIB in another language, set ``TINYIB_LOCALE`` to a language code found in `locale/`.
  6. [CHMOD](https://en.wikipedia.org/wiki/Chmod) write permissions to these directories:
     - ./ (the directory containing TinyIB)
