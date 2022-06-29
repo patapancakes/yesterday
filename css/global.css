@@ -158,6 +158,10 @@ hr {
 	text-decoration: none;
 }
 
+.g-recaptcha {
+	display: inline-block;
+}
+
 #switchStylesheet {
 	margin-left: 5px;
 }
