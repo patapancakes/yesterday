@@ -170,3 +170,7 @@ hr {
 	margin: 5px 0 0 2px;
 	font-weight: bold;
 }
+
+#posts {
+	padding: 3px;
+}
