@@ -64,10 +64,6 @@ hr {
 	text-decoration: none;
 }
 
-.reflink a:hover {
-	color: #800000;
-}
-
 .reply .filesize {
 	margin-left: 20px;
 }
