@@ -505,9 +505,9 @@ EOF;
 	$expandhtml = rawurlencode($expandhtml);
 
 	if (isEmbed($post["file_hex"])) {
-		$filesize .= "<a href=\"$direct_link\" onclick=\"return expandFile(event, '${post['id']}');\">${post['file_original']}</a>&ndash;(${post['file_hex']})";
+		$filesize .= "<a href=\"$direct_link\" onclick=\"return expandFile(event, '${post['id']}');\">${post['file_original']}</a> &ndash; (${post['file_hex']})";
 	} else if ($post["file"] != '') {
-		$filesize .= $thumblink . "${post["file"]}</a>&ndash;(${post["file_size_formatted"]}";
+		$filesize .= $thumblink . "${post["file"]}</a> &ndash; (${post["file_size_formatted"]}";
 		if ($post["image_width"] > 0 && $post["image_height"] > 0) {
 			$filesize .= ", " . $post["image_width"] . "x" . $post["image_height"];
 		}
