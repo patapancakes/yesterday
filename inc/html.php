@@ -657,7 +657,7 @@ function buildPage($htmlposts, $parent, $pages = 0, $thispage = 0, $lastpostid =
 		$pagelinks .= ($pages <= $thispage) ? ('<td>' . __('Next') . '</td>') : ('<td><form method="get" action="' . $next . '.html"><input value="' . __('Next') . '" type="submit"></form></td>');
 
 		$pagenavigator = <<<EOF
-<table border="1" style="display: inline-block;">
+<table style="display: inline-block;">
 	<tbody>
 		<tr>
 			$pagelinks
@@ -668,7 +668,7 @@ EOF;
 		if (TINYIB_CATALOG) {
 			$txt_catalog = __('Catalog');
 			$pagenavigator .= <<<EOF
-<table border="1" style="display: inline-block;margin-left: 21px;">
+<table style="display: inline-block;margin-left: 21px;">
 	<tbody>
 		<tr>
 			<td><form method="get" action="catalog.html"><input value="$txt_catalog" type="submit"></form></td>
