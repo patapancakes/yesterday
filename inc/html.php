@@ -662,17 +662,16 @@ function buildPage($htmlposts, $parent, $pages = 0, $thispage = 0, $lastpostid =
 		<tr>
 			$pagelinks
 		</tr>
-	</tbody>
-</table>
+
 EOF;
 		if (TINYIB_CATALOG) {
 			$txt_catalog = __('Catalog');
 			$pagenavigator .= <<<EOF
-<table style="display: inline-block;margin-left: 21px;">
-	<tbody>
 		<tr>
 			<td><form method="get" action="catalog.html"><input value="$txt_catalog" type="submit"></form></td>
 		</tr>
+EOF;
+		$pagenavigator .= <<<EOF
 	</tbody>
 </table>
 EOF;
