@@ -675,9 +675,9 @@ EOF;
 EOF;
 		}
 	} else if ($parent == -1) {
-		$postingmode = '&#91;<a href="index.html">' . __('Return') . '</a>&#93;<div class="replymode">' . __('Catalog') . '</div> ';
+		$postingmode = '<div class="replymode">' . __('Catalog') . '</div> ';
 	} else {
-		$postingmode = '&#91;<a href="../">' . __('Return') . '</a>&#93;<div class="replymode">' . __('Posting mode: Reply') . '</div> ';
+		$postingmode = '<div class="replymode">' . __('Posting mode: Reply') . '</div> ';
 	}
 
 	$postform = '';
@@ -711,11 +711,17 @@ EOF;
 		$select_style .= '</select>';
 	}
 
+	$returnlink = '';
+	if ($parent != TINYIB_NEWTHREAD) {
+		$returnlink .= '&middot; [<a href="../" style="text-decoration: underline;">Return</a>]';
+	}
+
 	$body = <<<EOF
 	<body>
 		<div class="adminbar">
 			$cataloglink
 			$managelink
+			$returnlink
 			$select_style
 		</div>
 		<div class="logo">
