@@ -896,7 +896,7 @@ function adminBar() {
 	if ($isadmin && installedViaGit()) {
 		$output .= ' [<a href="?manage&update">' . __('Update') . '</a>]';
 	}
-	$output .= ' &middot;  [<a href="?manage&changepassword">' . __('Change Password') . '</a>]';
+	$output .= ' &middot; [<a href="?manage&changepassword">' . __('Change Password') . '</a>]';
 	$output .= ' [<a href="?manage&logout">' . __('Log Out') . '</a>]';
 	$output .= ' &middot; ' . $return;
 	return $output;
