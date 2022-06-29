@@ -452,7 +452,7 @@ function buildPost($post, $res, $compact=false) {
 	$threadid = ($post['parent'] == TINYIB_NEWTHREAD) ? $post['id'] : $post['parent'];
 
 	if (TINYIB_REPORT) {
-		$reflink = '<a href="imgboard.php?report=' . $post['id'] . '" title="' . __('Report') . '">R</a> ';
+		$reflink = '<a href="imgboard.php?report=' . $post['id'] . '" title="' . __('Report') . '">Report</a> ';
 	} else {
 		$reflink = '';
 	}
