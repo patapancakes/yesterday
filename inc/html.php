@@ -404,13 +404,17 @@ EOF;
 					</tr>
 EOF;
 	}
+	$postreq_html = '<li>Posts require a file, all other fields are optional.</li>';
+	if (TINYIB_NOFILEOK) {
+		$postreq_html = "<li>Posts require a message or file, all other fields are optional.</li>";
+	}
 	$output .= <<<EOF
 					<tr>
 						<td colspan="2" class="rules">
 							$rules_extra
 							<ul>
 								$reqmod_html
-								<li>All fields are optional except for message.</li>
+								$postreq_html
 								$filetypes_html
 								$max_file_size_rules_html
 								$thumbnails_html
