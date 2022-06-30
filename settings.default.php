@@ -41,6 +41,7 @@ define('TINYIB_AUTOREFRESH', 30);     // Delay (in seconds) between attempts to 
 define('TINYIB_CLOUDFLARE', false);   // Only enable when the site is served via Cloudflare to identify IP addresses correctly
 define('TINYIB_DISALLOWTHREADS', ''); // When set, users attempting to post a new thread are shown this message instead  ['' to disable]
 define('TINYIB_DISALLOWREPLIES', ''); // When set, users attempting to post a reply are shown this message instead  ['' to disable]
+define('TINYIB_PASSWORDCOOKIE', false); // Use a password cookie instead of a password field
 
 // Board appearance
 define('TINYIB_INDEX', 'index.html'); // Index file

@@ -347,8 +347,19 @@ if (!isset($_GET['delete']) && !isset($_GET['manage']) && (isset($_POST['name'])
 			}
 		}
 	}
-	if ($staffpost || !in_array('password', $hide_fields)) {
-		$post['password'] = ($_POST['password'] != '') ? hashData($_POST['password']) : '';
+	if (TINYIB_PASSWORDCOOKIE) {
+		$pass = '';
+		if (isset($_COOKIE['pass'])) {
+			$pass = $_COOKIE['pass'];
+		} else {
+			$pass = base64_encode(random_bytes(32));
+			setcookie('pass', $pass, time() + 31536000);
+		}
+		$post['password'] = hashData($pass);
+	} else {
+		if ($staffpost || !in_array('password', $hide_fields)){
+			$post['password'] = ($_POST['password'] != '') ? hashData($_POST['password']) : '';
+		}
 	}
 
 	$hide_post = false;
@@ -709,10 +720,12 @@ EOF;
 		die();
 	}
 
+	$password = TINYIB_PASSWORDCOOKIE ? $_COOKIE['pass'] : $_POST['password'];
+
 	$post = postByID($post_ids[0]);
 	if (!$post) {
 		fancyDie(__('Sorry, an invalid post identifier was sent. Please go back, refresh the page, and try again.'));
-	} else if ($post['password'] != '' && (hashData($_POST['password']) == $post['password'] || md5(md5($_POST['password'])) == $post['password'])) {
+	} else if ($post['password'] != '' && (hashData($password) == $post['password'] || md5(md5($password)) == $post['password'])) {
 		deletePost($post['id']);
 		if ($post['parent'] == TINYIB_NEWTHREAD) {
 			threadUpdated($post['id']);

@@ -378,7 +378,7 @@ EOF;
 					$file_input_html
 					$embed_input_html
 EOF;
-	if ($staff_post || !in_array('password', $hide_fields)) {
+	if ($staff_post || !in_array('password', $hide_fields) || !TINYIB_PASSWORDCOOKIE) {
 		$txt_password = __('Password');
 		$txt_password_help = __('(for post and file deletion)');
 		$output .= <<<EOF
@@ -740,6 +740,8 @@ EOF;
 		<form id="delform" action="imgboard.php?delete" method="post">
 		<input type="hidden" name="board" 
 EOF;
+	$delete_html = $txt_delete_post . TINYIB_PASSWORDCOOKIE ? '' : '<input type="password" name="password" id="deletepostpassword" size="8" placeholder="$txt_password">' . '&nbsp;<input name="deletepost" value="$txt_delete" type="submit">';
+
 	$body .= 'value="' . TINYIB_BOARD . '">' . <<<EOF
 		<div id="posts">
 		$htmlposts
@@ -749,7 +751,7 @@ EOF;
 			<tbody>
 				<tr>
 					<td>
-						$txt_delete_post <input type="password" name="password" id="deletepostpassword" size="8" placeholder="$txt_password">&nbsp;<input name="deletepost" value="$txt_delete" type="submit">
+						$delete_html
 					</td>
 				</tr>
 			</tbody>
