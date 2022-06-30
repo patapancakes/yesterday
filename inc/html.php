@@ -404,10 +404,7 @@ EOF;
 					</tr>
 EOF;
 	}
-	$postreq_html = '<li>Posts require a file, all other fields are optional.</li>';
-	if (TINYIB_NOFILEOK) {
-		$postreq_html = "<li>Posts require a message or file, all other fields are optional.</li>";
-	}
+	$postreq_html = '<li>Posts require a ' . TINYIB_NOFILEOK ? 'message or ' : '' . 'file, all other fields are optional.</li>';
 	$output .= <<<EOF
 					<tr>
 						<td colspan="2" class="rules">
