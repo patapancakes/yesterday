@@ -53,7 +53,7 @@ define('TINYIB_EXPANDWIDTH', 85);     // Expanded content size as a percentage o
 define('TINYIB_BACKLINKS', true);     // Display reflinks to replies that reference a post
 define('TINYIB_CATALOG', true);       // Generate catalog page
 define('TINYIB_JSON', true);          // Generate JSON files
-define('TINYIB_DEFAULTSTYLE', 'futaba'); // Default page style
+define('TINYIB_DEFAULTSTYLE', 'yesterday'); // Default page style
 $tinyib_hidefieldsop = array();       // Fields to hide when creating a new thread - e.g. array('name', 'email', 'subject', 'message', 'file', 'embed', 'password')
 $tinyib_hidefields = array();         // Fields to hide when replying
 $tinyib_anonymous = array('Anonymous'); // Default name (or names)
@@ -61,6 +61,8 @@ $tinyib_capcodes = array(array('Admin', 'red'), array('Mod', 'purple')); // Admi
 // Stylesheets (located in css)
 //   Format: File name excluding extension => Title
 $tinyib_stylesheets = array(
+    'yesterday' => 'Yesterday',
+    'yesterdayb' => 'Yesterday B',
 	'futaba' => 'Futaba',
 	'burichan' => 'Burichan'
 );
