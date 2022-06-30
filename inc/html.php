@@ -713,10 +713,7 @@ EOF;
 		$select_style .= '</select>';
 	}
 
-	$returnlink = '';
-	if ($parent != TINYIB_NEWTHREAD) {
-		$returnlink .= '&middot; [<a href="../" style="text-decoration: underline;">Return</a>]';
-	}
+	$returnlink = $parent != TINYIB_NEWTHREAD ? '&middot; [<a href="../" style="text-decoration: underline;">Return</a>]' : '';
 
 	$body = <<<EOF
 	<body>
