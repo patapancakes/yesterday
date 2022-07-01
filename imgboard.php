@@ -651,8 +651,8 @@ if (!isset($_GET['delete']) && !isset($_GET['manage']) && (isset($_POST['name'])
 		if (!$post) {
 			fancyDie(__('Sorry, an invalid post identifier was sent. Please go back, refresh the page, and try again.'));
 		} else if ($post['password'] != '' && (hashData($password) == $post['password'] || md5(md5($password)) == $post['password'])) {
-			if (isset($_POST['onlyimgdel']) && !empty($_POST['onlyimgdel'])) {
-				deletePostImages($post['id']);
+			if (isset($_POST['onlyimgdel'])) {
+				deletePostImages($post);
 			} else {
 				deletePost($post['id']);
 			}
