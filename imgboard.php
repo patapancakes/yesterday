@@ -720,7 +720,14 @@ EOF;
 		die();
 	}
 
-	$password = TINYIB_PASSWORDCOOKIE ? $_COOKIE['tinyib_password'] : $_POST['password'];
+	$password = '';
+	if (TINYIB_PASSWORDCOOKIE) {
+		if (isset($_COOKIE['tinyib_password'])) {
+			$password = $_COOKIE['tinyib_password'];
+		}
+	} else {
+		$password = $_POST['password'];
+	}
 
 	$post = postByID($post_ids[0]);
 	if (!$post) {
