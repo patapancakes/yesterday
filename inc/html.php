@@ -729,7 +729,7 @@ EOF;
 		<form id="delform" action="imgboard.php?delete" method="post">
 		<input type="hidden" name="board" 
 EOF;
-	$delete_html = $txt_delete_post . (TINYIB_PASSWORDCOOKIE ? '' : '<input type="password" name="password" id="deletepostpassword" size="8" placeholder="'. $txt_password .'">') . '&nbsp;<input name="deletepost" value="' . $txt_delete . '" type="submit">';
+	$delete_html = $txt_delete_post . ': [<input name="onlyimgdel" type="checkbox">File Only]' . (TINYIB_PASSWORDCOOKIE ? '' : '<input type="password" name="password" id="deletepostpassword" size="8" placeholder="'. $txt_password .'">') . '&nbsp;<input name="deletepost" value="' . $txt_delete . '" type="submit">';
 	$report_html = TINYIB_REPORT ? '<input name="reportpost" value="Report" type="submit">' : '';
 
 	$body .= 'value="' . TINYIB_BOARD . '">' . <<<EOF

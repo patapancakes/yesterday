@@ -651,13 +651,17 @@ if (!isset($_GET['delete']) && !isset($_GET['manage']) && (isset($_POST['name'])
 		if (!$post) {
 			fancyDie(__('Sorry, an invalid post identifier was sent. Please go back, refresh the page, and try again.'));
 		} else if ($post['password'] != '' && (hashData($password) == $post['password'] || md5(md5($password)) == $post['password'])) {
-			deletePost($post['id']);
+			if (isset($_POST['onlyimgdel']) && !empty($_POST['onlyimgdel'])) {
+				deletePostImages($post['id']);
+			} else {
+				deletePost($post['id']);
+			}
 			if ($post['parent'] == TINYIB_NEWTHREAD) {
 				threadUpdated($post['id']);
 			} else {
 				threadUpdated($post['parent']);
 			}
-			fancyDie(__('Post deleted.'));
+			fancyDie(__('Post and/or file deleted.'));
 		} else {
 			fancyDie(__('Invalid password.'));
 		}
