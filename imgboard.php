@@ -353,7 +353,7 @@ if (!isset($_GET['delete']) && !isset($_GET['manage']) && (isset($_POST['name'])
 			$pass = $_COOKIE['tinyib_password'];
 		} else {
 			$pass = base64_encode(random_bytes(32));
-			setcookie('pass', $pass, time() + 31536000);
+			setcookie('tinyib_password', $pass, time() + 31536000);
 		}
 		$post['password'] = hashData($pass);
 	} else {
