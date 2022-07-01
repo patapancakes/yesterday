@@ -715,7 +715,6 @@ EOF;
 			$cataloglink
 			$managelink
 			$returnlink
-			$select_style
 		</div>
 		<div class="logo">
 EOF;
@@ -742,6 +741,7 @@ EOF;
 					<td>
 						$delete_html
 						$report_html
+						$select_style
 					</td>
 				</tr>
 			</tbody>
