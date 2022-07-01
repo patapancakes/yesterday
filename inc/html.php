@@ -454,12 +454,7 @@ function buildPost($post, $res, $compact=false) {
 	$return = "";
 	$threadid = ($post['parent'] == TINYIB_NEWTHREAD) ? $post['id'] : $post['parent'];
 
-	if (TINYIB_REPORT) {
-		$reflink = '<a href="imgboard.php?report=' . $post['id'] . '" title="' . __('Report') . '">Report</a> ';
-	} else {
-		$reflink = '';
-	}
-
+	$reflink = '';
 	if ($res == TINYIB_RESPAGE) {
 		$reflink .= "<a href=\"$threadid.html#{$post['id']}\">No.</a><a href=\"$threadid.html#q{$post['id']}\" onclick=\"javascript:quotePost('{$post['id']}')\">{$post['id']}</a>";
 	} else {
@@ -735,6 +730,7 @@ EOF;
 		<input type="hidden" name="board" 
 EOF;
 	$delete_html = $txt_delete_post . (TINYIB_PASSWORDCOOKIE ? '' : '<input type="password" name="password" id="deletepostpassword" size="8" placeholder="'. $txt_password .'">') . '&nbsp;<input name="deletepost" value="' . $txt_delete . '" type="submit">';
+	$report_html = TINYIB_REPORT ? '<input name="reportpost" value="Report" type="submit">' : '';
 
 	$body .= 'value="' . TINYIB_BOARD . '">' . <<<EOF
 		<div id="posts">
@@ -746,6 +742,7 @@ EOF;
 				<tr>
 					<td>
 						$delete_html
+						$report_html
 					</td>
 				</tr>
 			</tbody>

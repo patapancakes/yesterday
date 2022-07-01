@@ -611,15 +611,75 @@ if (!isset($_GET['delete']) && !isset($_GET['manage']) && (isset($_POST['name'])
 
 	echo json_encode($json_posts);
 	die();
-// Check if the request is to report a post
-} elseif (isset($_GET['report']) && !isset($_GET['manage'])) {
+// Check if the request is to delete a post and/or its associated image, or if the request is to report a post
+} elseif (isset($_GET['delete']) && !isset($_GET['manage'])) {
+	if (isset($_POST['deletepost'])) {
+		$lock = lockDatabase();
+
+		if (!isset($_POST['delete'])) {
+			fancyDie(__('Tick the box next to a post and click "Delete" to delete it.'));
+		}
+	
+		if (TINYIB_DBMIGRATE) {
+			fancyDie(__('Post deletion is currently disabled.<br>Please try again in a few moments.'));
+		}
+	
+		$post_ids = array();
+		if (is_array($_POST['delete'])) {
+			$post_ids = $_POST['delete'];
+		} else {
+			$post_ids = array($_POST['delete']);
+		}
+	
+		list($account, $loggedin, $isadmin) = manageCheckLogIn(false);
+		if (!empty($account)) {
+			// Redirect to post moderation page
+			echo '--&gt; --&gt; --&gt;<meta http-equiv="refresh" content="0;url=' . basename($_SERVER['PHP_SELF']) . '?manage&moderate=' . implode(',', $post_ids) . '">';
+			die();
+		}
+	
+		$password = '';
+		if (TINYIB_PASSWORDCOOKIE) {
+			if (isset($_COOKIE['tinyib_password'])) {
+				$password = $_COOKIE['tinyib_password'];
+			}
+		} else {
+			$password = $_POST['password'];
+		}
+	
+		$post = postByID($post_ids[0]);
+		if (!$post) {
+			fancyDie(__('Sorry, an invalid post identifier was sent. Please go back, refresh the page, and try again.'));
+		} else if ($post['password'] != '' && (hashData($password) == $post['password'] || md5(md5($password)) == $post['password'])) {
+			deletePost($post['id']);
+			if ($post['parent'] == TINYIB_NEWTHREAD) {
+				threadUpdated($post['id']);
+			} else {
+				threadUpdated($post['parent']);
+			}
+			fancyDie(__('Post deleted.'));
+		} else {
+			fancyDie(__('Invalid password.'));
+		}
+	
+		$redirect = false;
+	}
+	// Assume that the request is to report a post
 	$lock = lockDatabase();
 
 	if (!TINYIB_REPORT) {
 		fancyDie(__('Reporting is disabled.'));
 	}
 
-	$post = postByID($_GET['report']);
+	if (!isset($_POST['delete'])) {
+		fancyDie(__('Tick the box next to a post and click "Report" to report it.'));
+	}
+
+	if (is_array($_POST['delete'])) {
+		fancyDie(__('You can only report one post at a time.'));
+	}
+
+	$post = postByID($_POST['delete']);
 	if (!$post) {
 		fancyDie(__('Sorry, an invalid post identifier was sent. Please go back, refresh the page, and try again.'));
 	}
@@ -694,57 +754,6 @@ EOF;
 	checkAutoHide($post);
 
 	fancyDie(__('Post reported.'), $go_back);
-// Check if the request is to delete a post and/or its associated image
-} elseif (isset($_GET['delete']) && !isset($_GET['manage'])) {
-	$lock = lockDatabase();
-
-	if (!isset($_POST['delete'])) {
-		fancyDie(__('Tick the box next to a post and click "Delete" to delete it.'));
-	}
-
-	if (TINYIB_DBMIGRATE) {
-		fancyDie(__('Post deletion is currently disabled.<br>Please try again in a few moments.'));
-	}
-
-	$post_ids = array();
-	if (is_array($_POST['delete'])) {
-		$post_ids = $_POST['delete'];
-	} else {
-		$post_ids = array($_POST['delete']);
-	}
-
-	list($account, $loggedin, $isadmin) = manageCheckLogIn(false);
-	if (!empty($account)) {
-		// Redirect to post moderation page
-		echo '--&gt; --&gt; --&gt;<meta http-equiv="refresh" content="0;url=' . basename($_SERVER['PHP_SELF']) . '?manage&moderate=' . implode(',', $post_ids) . '">';
-		die();
-	}
-
-	$password = '';
-	if (TINYIB_PASSWORDCOOKIE) {
-		if (isset($_COOKIE['tinyib_password'])) {
-			$password = $_COOKIE['tinyib_password'];
-		}
-	} else {
-		$password = $_POST['password'];
-	}
-
-	$post = postByID($post_ids[0]);
-	if (!$post) {
-		fancyDie(__('Sorry, an invalid post identifier was sent. Please go back, refresh the page, and try again.'));
-	} else if ($post['password'] != '' && (hashData($password) == $post['password'] || md5(md5($password)) == $post['password'])) {
-		deletePost($post['id']);
-		if ($post['parent'] == TINYIB_NEWTHREAD) {
-			threadUpdated($post['id']);
-		} else {
-			threadUpdated($post['parent']);
-		}
-		fancyDie(__('Post deleted.'));
-	} else {
-		fancyDie(__('Invalid password.'));
-	}
-
-	$redirect = false;
 // Check if the request is to access the management area
 } elseif (isset($_GET['manage'])) {
 	$lock = lockDatabase();
