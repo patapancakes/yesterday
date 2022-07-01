@@ -349,8 +349,8 @@ if (!isset($_GET['delete']) && !isset($_GET['manage']) && (isset($_POST['name'])
 	}
 	if (TINYIB_PASSWORDCOOKIE) {
 		$pass = '';
-		if (isset($_COOKIE['pass'])) {
-			$pass = $_COOKIE['pass'];
+		if (isset($_COOKIE['tinyib_password'])) {
+			$pass = $_COOKIE['tinyib_password'];
 		} else {
 			$pass = base64_encode(random_bytes(32));
 			setcookie('pass', $pass, time() + 31536000);
@@ -720,7 +720,7 @@ EOF;
 		die();
 	}
 
-	$password = TINYIB_PASSWORDCOOKIE ? $_COOKIE['pass'] : $_POST['password'];
+	$password = TINYIB_PASSWORDCOOKIE ? $_COOKIE['tinyib_password'] : $_POST['password'];
 
 	$post = postByID($post_ids[0]);
 	if (!$post) {
