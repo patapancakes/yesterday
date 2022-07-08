@@ -141,7 +141,17 @@ hr {
 	text-align: center;
 	text-overflow: ellipsis;
 	min-width: 100px;
-	padding: 0px 3px 3px;
+	padding: 3px 20px 20px;
+}
+
+.catalogpost a {
+	display: inline-block;
+	height: 153px;
+}
+
+.catalogpost img {
+	width: auto;
+	height: 150px;
 }
 
 .login {
@@ -169,8 +179,4 @@ hr {
 #newreplies {
 	margin: 5px 0 0 2px;
 	font-weight: bold;
-}
-
-#posts {
-	padding: 3px;
 }
