@@ -707,7 +707,7 @@ EOF;
 		$select_style .= '</select>';
 	}
 
-	$returnlink = $parent != TINYIB_NEWTHREAD ? '&middot; [<a href="." style="text-decoration: underline;">Return</a>]' : '';
+	$returnlink = $parent != TINYIB_NEWTHREAD ? '&middot; [<a href="' . TINYIB_INDEX . '" style="text-decoration: underline;">Return</a>]' : '';
 
 	$body = <<<EOF
 	<body>
@@ -862,9 +862,9 @@ function rebuildThread($id) {
 }
 
 function adminBar() {
-	global $account, $loggedin, $isadmin, $returnlink;
+	global $account, $loggedin, $isadmin;
 
-	$return = '[<a href="' . $returnlink . '" style="text-decoration: underline;">' . __('Return') . '</a>]';
+	$return = '[<a href="'. TINYIB_INDEX . '" style="text-decoration: underline;">' . __('Return') . '</a>]';
 	if (!$loggedin) {
 		return $return;
 	}

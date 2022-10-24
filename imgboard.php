@@ -768,7 +768,6 @@ EOF;
 	$redirect = false;
 	$loggedin = false;
 	$isadmin = false;
-	$returnlink = basename($_SERVER['PHP_SELF']);
 
 	if (isset($_GET["logout"])) {
 		$_SESSION['tinyib'] = '';
