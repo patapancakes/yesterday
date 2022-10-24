@@ -64,8 +64,8 @@ $tinyib_capcodes = array(array('Admin', 'red'), array('Mod', 'purple')); // Admi
 $tinyib_stylesheets = array(
     'yesterday' => 'Yesterday',
     'yesterdayb' => 'Yesterday B',
-	'futaba' => 'Futaba',
-	'burichan' => 'Burichan'
+    'futaba' => 'Futaba',
+    'burichan' => 'Burichan'
 );
 
 // Post control
