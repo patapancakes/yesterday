@@ -634,7 +634,7 @@ if (!isset($_GET['delete']) && !isset($_GET['manage']) && (isset($_POST['name'])
 		list($account, $loggedin, $isadmin) = manageCheckLogIn(false);
 		if (!empty($account)) {
 			// Redirect to post moderation page
-			echo '--&gt; --&gt; --&gt;<meta http-equiv="refresh" content="0;url=' . basename($_SERVER['PHP_SELF']) . '?manage&moderate=' . implode(',', $post_ids) . '">';
+			echo '<meta http-equiv="refresh" content="0;url=' . basename($_SERVER['PHP_SELF']) . '?manage&moderate=' . implode(',', $post_ids) . '">';
 			die();
 		}
 	
@@ -774,7 +774,7 @@ EOF;
 		$_SESSION['tinyib'] = '';
 		$_SESSION['tinyib_key'] = '';
 		session_destroy();
-		die('--&gt; --&gt; --&gt;<meta http-equiv="refresh" content="0;url=imgboard.php">');
+		die('<meta http-equiv="refresh" content="0;url=imgboard.php">');
 	}
 
 	list($account, $loggedin, $isadmin) = manageCheckLogIn(true);
@@ -1251,5 +1251,5 @@ EOF;
 }
 
 if ($redirect) {
-	echo '--&gt; --&gt; --&gt;<meta http-equiv="refresh" content="' . (isset($slow_redirect) ? '3' : '0') . ';url=' . (is_string($redirect) ? $redirect : TINYIB_INDEX) . '">';
+	echo '<meta http-equiv="refresh" content="' . (isset($slow_redirect) ? '3' : '0') . ';url=' . (is_string($redirect) ? $redirect : TINYIB_INDEX) . '">';
 }
