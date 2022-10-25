@@ -254,7 +254,7 @@ class SimpleCaptcha {
 		$text = trim(fgets($fp));
 		fclose($fp);
 
-		/** Change random volcals */
+		/** Change random vocals */
 		if ($extended) {
 			$text = preg_split('//', $text, -1, PREG_SPLIT_NO_EMPTY);
 			$vocals = array('a', 'e', 'i', 'o', 'u');
@@ -349,7 +349,6 @@ class SimpleCaptcha {
 	 * Reduce the image to the final size
 	 */
 	protected function ReduceImage() {
-		// Reduzco el tama�o de la imagen
 		$imResampled = imagecreatetruecolor($this->width, $this->height);
 		imagecopyresampled($imResampled, $this->im,
 			0, 0, 0, 0,
